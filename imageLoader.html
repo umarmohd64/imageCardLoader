@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+
+<title>Image Loader</title>
+<style>
+    .heading{
+        text-align: center;
+        font-size: 12px;
+        margin-bottom: 4rem;
+        margin-top: 2rem;
+    }
+  .image-container {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .card {
+    width: 200px;
+    height: 250px;
+    margin: 15px;
+    padding-bottom: 5px ;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 200ms;
+    cursor: pointer;
+
+  }
+  .card:hover{
+    scale: 102%;
+    box-shadow: -4px -2px 8px rgba(0, 0, 0, 0.372);
+
+  }
+  .card img {
+    width: 100%;
+    height:75%;
+    object-fit: cover;
+  }
+  .card-content {
+    padding: 5px;
+  }
+  .name {
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+  }
+  .position {
+    color: #888;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+</style>
+
+
+</head>
+<body style="font-family: Poppins, sans-serif;" >
+    <div class="heading">
+        <h1>
+            Select Your Doctor
+        </h1>
+    </div>
+<div class="image-container" id="imageContainer"></div>
+
+<script>
+
+  const imageData = [
+    {"name": "Naveen Kumar", "position": "Web Developer", "image": "https://img.freepik.com/free-photo/smiling-doctor-with-strethoscope-isolated-grey_651396-974.jpg?w=996&t=st=1708672090~exp=1708672690~hmac=ff2fb75f91a2668869c8c88b40c8011dacf33bc2bb75ed48be4e64548bce32d6"}, //1
+    {"name": "Yasser Khan", "position": "Eye Specialist", "image": "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5790.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //2
+    {"name": "Jane Smith", "position": "Peditrician", "image": "https://img.freepik.com/premium-photo/woman-lab-coat-with-stethoscope-her-neck-smiles-camera_926968-45.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //3
+    {"name": "Jennifer Kuala", "position": "Physiotherapsit", "image": "https://img.freepik.com/free-photo/handsome-smiling-medical-professional-examining-with-stethoscope-colored-background_662251-366.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //4
+    {"name": "Mohammad Ibra", "position": "Dentist", "image": "https://img.freepik.com/free-photo/doctors-day-cute-young-handsome-man-lab-coat-glasses-smiling-holding-book_140725-162884.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //5
+    {"name": "Kalesh Kumar", "position": "Orthodontist", "image": "https://img.freepik.com/free-photo/nurse-portrait-hospital_23-2150780304.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //6
+    {"name": "JP Dubey", "position": "Pediatrician", "image": "https://img.freepik.com/free-photo/pleased-young-female-doctor-wearing-medical-robe-stethoscope-around-neck-standing-with-closed-posture_409827-254.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //7
+    {"name": "Cristiano Ronaldo", "position": "Cardiologist", "image": "https://img.freepik.com/free-photo/smiling-touching-arms-crossed-room-hospital_1134-799.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //8
+    {"name": "Messi", "position": "Audiologist", "image": "https://img.freepik.com/free-photo/female-doctor-showing-victory-sign-blue-uniform-looking-sharming_176474-82981.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //9
+    {"name": "Varun Grover", "position": "Pediatrician", "image": "https://img.freepik.com/free-photo/happy-doctor-holding-clipboard-with-patients_1098-2176.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //10
+    {"name": "Mohd Umar", "position": "Psychiatrist", "image": "https://img.freepik.com/free-photo/young-lady-looking-pointing-copy-space_171337-5771.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //11
+    {"name": "Vedika Jain", "position": "Veterinarian", "image": "https://img.freepik.com/free-photo/portrait-smiling-handsome-male-doctor-man_171337-5055.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //12
+    {"name": "Kojla Kuhnlnez", "position": "Radiologist", "image": "https://img.freepik.com/free-photo/young-female-medicine-doctor-scrubs-showing-latex-gloves_114579-78370.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //13
+    {"name": "Berlin Smith", "position": "Pulmonologist", "image": "https://img.freepik.com/free-photo/doctor-white-coat-using-digital-tablet-reading-medical-data-gadget-working-hospital-standin_1258-88112.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //14
+    {"name": "Hiba Sainudeen", "position": "Neurologist", "image": "https://img.freepik.com/free-photo/portrait-smiling-male-doctor_171337-1532.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //15
+    {"name": "Christopher", "position": "Cardiothoracic", "image": "https://img.freepik.com/free-photo/portrait-successful-mid-adult-doctor-with-crossed-arms_1262-12865.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //16
+    {"name": "Gajendra", "position": "Surgeon", "image": "https://img.freepik.com/free-photo/medical-workers-covid-19-vaccination-concept-confident-professional-doctor-female-nurse-blue-scrubs-stethoscope-show-thumbs-up-assure-guarantee-best-quality-service-clinic_1258-57360.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //17
+    {"name": "Amit Thakur", "position": "Psychiatrist", "image": "https://img.freepik.com/free-photo/young-doctor-getting-ready-work_23-2149393691.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //18
+    {"name": "Prateek Gandhi", "position": "Cardiologist", "image": "https://img.freepik.com/free-photo/young-doctor-black-polo-shirt-looking-his-side-looking-attentive_176474-8841.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //19
+    {"name": "Xenium Sharma", "position": "Psychiatrist", "image": "https://img.freepik.com/free-photo/joyful-young-female-ginger-doctor-wearing-medical-robe-stethoscope-showing-empty-hands-isolated-orange-wall_141793-112853.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //20
+    {"name": "Mhanna Aljabab", "position": "Psychiatrist", "image": "https://img.freepik.com/free-photo/portrait-mature-therapist-sitting-table-looking-camera_1098-18156.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //21
+    {"name": "Wael Alomari", "position": "Psychiatrist", "image": "https://img.freepik.com/free-photo/doctor-with-his-arms-crossed-white-background_1368-5789.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //22
+    {"name": "Najma Khateb", "position": "Psychiatrist", "image": "https://img.freepik.com/free-photo/man-doctor-protective-suit-mask-working-feeling-tired-white_140725-93643.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //23
+    {"name": "Johnny Sins", "position": "Psychiatrist", "image": "https://img.freepik.com/free-photo/young-handsome-doctor-with-stethoscope-clinic_1303-19765.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //24
+    {"name": "Najwa Joharji", "position": "Psychiatrist", "image": "https://img.freepik.com/free-photo/doctors-day-handsome-brunette-cute-guy-medical-gown-with-crossed-hands_140725-162942.jpg?size=626&ext=jpg&ga=GA1.1.1095130742.1708671590&semt=sph"}, //25
+
+    // Add more entries here
+  ];
+
+
+  function loadImages() {
+    const container = document.getElementById('imageContainer');
+    imageData.forEach(data => {
+      const card = document.createElement('div');
+      card.classList.add('card');
+
+      const img = new Image();
+      img.src = data.image;
+      img.alt = 'Image';
+
+      const cardContent = document.createElement('div');
+      cardContent.classList.add('card-content');
+
+      const name = document.createElement('div');
+      name.classList.add('name');
+      name.textContent = data.name;
+
+      const position = document.createElement('div');
+      position.classList.add('position');
+      position.textContent = data.position;
+
+      cardContent.appendChild(name);
+      cardContent.appendChild(position);
+
+      card.appendChild(img);
+      card.appendChild(cardContent);
+
+      container.appendChild(card);
+    });
+  }
+
+  // Loading images when the page is fully loaded
+  window.onload = loadImages;
+</script>
+</body>
+</html>
